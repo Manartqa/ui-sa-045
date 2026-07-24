@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Breadcrumb, Button } from "antd";
+import { SectionTitle } from "@/components/common";
 import {
   LIST_BREADCRUMB_ITEMS,
   LIST_PAGE_TITLE,
@@ -16,9 +17,9 @@ export default function ListHeader({ onCreate }: ListHeaderProps) {
     <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
       <div className="min-w-0">
         <Breadcrumb items={LIST_BREADCRUMB_ITEMS} />
-        <h1 className="m-0 mt-1 text-base font-bold leading-6 text-black">
+        <SectionTitle variant="page" className="!mt-1">
           {LIST_PAGE_TITLE}
-        </h1>
+        </SectionTitle>
       </div>
       <Button type="primary" size="large" className="shrink-0" onClick={onCreate}>
         เพิ่มคำขอ

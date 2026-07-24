@@ -15,7 +15,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <NavBar />
       <Layout>
         <Sidebar />
-        <Layout.Content className="min-w-0 bg-[#F5F5F5] p-4 md:p-8">
+        <Layout.Content className="min-w-0 p-4 md:p-8">
           {children}
         </Layout.Content>
       </Layout>

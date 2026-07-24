@@ -5,6 +5,7 @@ import { Card, Table, Button, Space } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { FileTextOutlined } from "@ant-design/icons";
 import { StatusTag } from "@/components/ui/StatusTag";
+import { SectionTitle } from "@/components/common";
 import type { PermitItem } from "@/types/app/importRequestA4";
 import { PERMIT_ITEMS } from "./ImportRequestA4.config";
 
@@ -29,9 +30,7 @@ export default function PermitTable() {
   return (
     <Card styles={{ body: { padding: 32 } }}>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h2 className="m-0 text-lg font-bold leading-7 text-black">
-          ข้อมูลหนังสืออนุญาตเปิดดำเนินการผลิตอาวุธ
-        </h2>
+        <SectionTitle>ข้อมูลหนังสืออนุญาตเปิดดำเนินการผลิตอาวุธ</SectionTitle>
         <Space wrap>
           <Button size="large">ค้นหา</Button>
           <Button type="primary" size="large">

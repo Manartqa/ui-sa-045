@@ -1,6 +1,9 @@
 "use client";
 
 import React from "react";
+import { Typography } from "antd";
+
+const { Text } = Typography;
 
 interface InfoFieldProps {
   label: React.ReactNode;
@@ -11,8 +14,10 @@ interface InfoFieldProps {
 export default function InfoField({ label, value }: InfoFieldProps) {
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-base font-bold leading-6 text-black">{label}</div>
-      <div className="text-sm leading-[22px] text-black">{value ?? "-"}</div>
+      <Text strong style={{ fontSize: 16, lineHeight: "24px" }}>
+        {label}
+      </Text>
+      <Text>{value ?? "-"}</Text>
     </div>
   );
 }

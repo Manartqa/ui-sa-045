@@ -3,6 +3,7 @@
 import React from "react";
 import { ConfigProvider, App, theme } from "antd";
 import thTH from "antd/locale/th_TH";
+import { brand, FONT_FAMILY } from "@/theme";
 
 export function UIProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -11,11 +12,14 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
       theme={{
         algorithm: theme.defaultAlgorithm,
         token: {
-          colorPrimary: "#6574FF",
-          colorInfo: "#6574FF",
+          colorPrimary: brand.primary,
+          colorInfo: brand.primary,
+          colorSuccess: brand.success,
+          colorWarning: brand.warning,
+          colorError: brand.error,
+          colorBgLayout: brand.contentBg,
           borderRadius: 8,
-          fontFamily:
-            "var(--font-noto-sans-thai), 'Noto Sans Thai', 'Noto Sans', sans-serif",
+          fontFamily: FONT_FAMILY,
         },
         components: {
           Form: {
@@ -23,21 +27,25 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
             itemMarginBottom: 16,
           },
           Layout: {
-            headerBg: "#343D55",
-            siderBg: "#272E40",
+            headerBg: brand.headerBg,
+            siderBg: brand.siderBg,
             headerHeight: 64,
             headerPadding: "0 24px 0 40px",
           },
           Menu: {
-            darkItemBg: "#272E40",
-            darkSubMenuItemBg: "#272E40",
-            darkPopupBg: "#272E40",
+            darkItemBg: brand.siderBg,
+            darkSubMenuItemBg: brand.siderBg,
+            darkPopupBg: brand.siderBg,
             darkItemSelectedBg: "#1677FF",
             itemBorderRadius: 8,
           },
           Table: {
             headerBg: "#FAFAFA",
             headerColor: "rgba(0,0,0,0.88)",
+          },
+          // The request lifecycle stepper is green, not the app purple.
+          Steps: {
+            colorPrimary: brand.success,
           },
         },
       }}

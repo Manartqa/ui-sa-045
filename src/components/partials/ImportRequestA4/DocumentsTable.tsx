@@ -5,7 +5,7 @@ import { Card, Table, Button } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { FileTextOutlined, UploadOutlined } from "@ant-design/icons";
 import { StatusTag } from "@/components/ui/StatusTag";
-import { TablePagination } from "@/components/common";
+import { SectionTitle, TablePagination } from "@/components/common";
 import type { EvidenceDocumentItem } from "@/types/app/importRequestA4";
 import { EVIDENCE_DOCUMENTS } from "./ImportRequestA4.config";
 
@@ -46,9 +46,7 @@ const columns: ColumnsType<EvidenceDocumentItem> = [
 export default function DocumentsTable() {
   return (
     <Card styles={{ body: { padding: 32 } }}>
-      <h2 className="m-0 mb-4 text-lg font-bold leading-7 text-black">
-        ข้อมูลเอกสารหลักฐาน
-      </h2>
+      <SectionTitle className="!mb-4">ข้อมูลเอกสารหลักฐาน</SectionTitle>
       <Table<EvidenceDocumentItem>
         className="app-table"
         columns={columns}

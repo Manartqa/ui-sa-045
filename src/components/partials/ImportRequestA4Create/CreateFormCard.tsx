@@ -14,8 +14,10 @@ import {
   Checkbox,
   Select,
   Divider,
+  Typography,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { SectionTitle } from "@/components/common";
 import {
   APPLICANT_PLACEHOLDERS,
   REQUEST_FOR_OPTIONS,
@@ -37,9 +39,9 @@ function thaiDateToDayjs(d: string) {
 
 function RequiredNote() {
   return (
-    <div className="mt-1 text-sm leading-[22px]">
-      <span className="text-[#FA5E5E]">หมายเหตุ</span>{" "}
-      ต้องเลือกอย่างน้อยหนึ่งรายการ
+    <div className="mt-1">
+      <Typography.Text type="danger">หมายเหตุ</Typography.Text>{" "}
+      <Typography.Text>ต้องเลือกอย่างน้อยหนึ่งรายการ</Typography.Text>
     </div>
   );
 }
@@ -169,9 +171,7 @@ export default function CreateFormCard() {
 
         <Divider className="!my-4" />
 
-        <h2 className="m-0 mb-2 text-lg font-bold leading-7 text-black">
-          ผู้ยื่นคำขอ
-        </h2>
+        <SectionTitle className="!mb-2">ผู้ยื่นคำขอ</SectionTitle>
         <Row gutter={16}>
           <Col xs={24} md={8}>
             <Form.Item label="คำนำหน้า" name="prefix" required>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Typography, theme } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { StatusTag } from "@/components/ui/StatusTag";
 import {
@@ -10,31 +10,42 @@ import {
   REQUEST_META,
 } from "./ImportRequestA4.config";
 
+const { Text, Title } = Typography;
+
 export default function RequestHeader() {
+  const { token } = theme.useToken();
+
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
       <div className="min-w-0">
         <Breadcrumb items={BREADCRUMB_ITEMS} />
         <div className="mt-1 flex items-center gap-2">
           <LeftOutlined className="text-lg" />
-          <h1 className="m-0 text-base font-bold leading-6 text-black">
+          <Title level={5} style={{ margin: 0 }}>
             {PAGE_TITLE}
-          </h1>
+          </Title>
         </div>
       </div>
       <div className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
-        <div className="w-[250px] rounded-lg border border-[#D9D9D9] bg-white p-4 text-sm leading-[22px]">
+        <div
+          className="w-[250px] p-4"
+          style={{
+            border: `1px solid ${token.colorBorder}`,
+            background: token.colorBgContainer,
+            borderRadius: token.borderRadius,
+          }}
+        >
           <div className="flex gap-2">
-            <span>สร้างข้อมูล:</span>
-            <span>{REQUEST_META.createdAt}</span>
+            <Text>สร้างข้อมูล:</Text>
+            <Text>{REQUEST_META.createdAt}</Text>
           </div>
           <div className="mt-2 flex gap-2">
-            <span>ปรับปรุงล่าสุด:</span>
-            <span>{REQUEST_META.updatedAt}</span>
+            <Text>ปรับปรุงล่าสุด:</Text>
+            <Text>{REQUEST_META.updatedAt}</Text>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-sm">
-          <span>สถานะ:</span>
+        <div className="flex items-center gap-2">
+          <Text>สถานะ:</Text>
           <StatusTag status="CREATED" />
         </div>
       </div>

@@ -1,26 +1,26 @@
 "use client";
 
 import React from "react";
-import { Tabs, Card, Row, Col, Divider, Button } from "antd";
-import { InfoField } from "@/components/common";
+import { Tabs, Card, Row, Col, Divider, Button, Typography, theme } from "antd";
+import { InfoField, SectionTitle } from "@/components/common";
 import {
   APPLICATION_FORM,
   OFFICE_INFO,
   REGISTRATION_INFO,
 } from "./ImportRequestA4.config";
 
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="m-0 text-lg font-bold leading-7 text-black">{children}</h2>
-  );
-}
+const { Text } = Typography;
 
 function FormContent() {
+  const { token } = theme.useToken();
+
   return (
     <Card className="!rounded-tl-none" styles={{ body: { padding: 32 } }}>
       <div className="flex items-center justify-between gap-4">
         <SectionTitle>{APPLICATION_FORM.title}</SectionTitle>
-        <span className="shrink-0 text-sm text-[#FAAD14]">รอตรวจสอบ</span>
+        <Text className="shrink-0" style={{ color: token.colorWarning }}>
+          รอตรวจสอบ
+        </Text>
       </div>
 
       <Row gutter={[16, 24]} className="mt-6">
@@ -179,6 +179,8 @@ function FormContent() {
 }
 
 export default function RequestFormTab() {
+  const { token } = theme.useToken();
+
   return (
     <Tabs
       type="card"
@@ -188,7 +190,11 @@ export default function RequestFormTab() {
         { key: "form", label: "แบบคำขอ", children: <FormContent /> },
         {
           key: "factory",
-          label: <span className="font-bold text-[#FAAD14]">ข้อมูลโรงงาน</span>,
+          label: (
+            <Text strong style={{ color: token.colorWarning }}>
+              ข้อมูลโรงงาน
+            </Text>
+          ),
           children: null,
         },
         { key: "person", label: "ข้อมูลบุคคล", children: null },

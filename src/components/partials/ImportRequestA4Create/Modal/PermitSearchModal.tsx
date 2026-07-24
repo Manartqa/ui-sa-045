@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Modal, Table, Button } from "antd";
+import { Modal, Table, Button, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { FilePdfOutlined, FileOutlined } from "@ant-design/icons";
 import { TablePagination } from "@/components/common";
+import { brand } from "@/theme";
 
 export interface PermitA2Item {
   key: string;
@@ -109,8 +110,8 @@ const columns: ColumnsType<PermitA2Item> = [
     width: 100,
     render: () => (
       <Button
-        icon={<FilePdfOutlined className="!text-[#FA5E5E]" />}
-        className="!border-0 !bg-[#FA5E5E]/10"
+        icon={<FilePdfOutlined style={{ color: brand.error }} />}
+        style={{ border: 0, background: `${brand.error}1A` }}
       />
     ),
   },
@@ -149,7 +150,9 @@ export default function PermitSearchModal({
       onCancel={onClose}
       width={1200}
       title={
-        <span className="text-base font-bold">ค้นหาใบอนุญาต อ.2</span>
+        <Typography.Text strong style={{ fontSize: 16 }}>
+          ค้นหาใบอนุญาต อ.2
+        </Typography.Text>
       }
       footer={
         <Button
@@ -169,12 +172,15 @@ export default function PermitSearchModal({
         pagination={false}
         scroll={{ x: 1000 }}
         size="middle"
+        rowSelection={{
+          type: "radio",
+          selectedRowKeys: selectedKey ? [selectedKey] : [],
+          onChange: (keys) => setSelectedKey(keys[0] as string),
+        }}
         onRow={(record) => ({
           onClick: () => setSelectedKey(record.key),
+          style: { cursor: "pointer" },
         })}
-        rowClassName={(record) =>
-          record.key === selectedKey ? "!bg-[#6574FF]/10 cursor-pointer" : "cursor-pointer"
-        }
       />
       <TablePagination total={PERMIT_A2_ITEMS.length} />
     </Modal>

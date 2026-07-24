@@ -4,7 +4,7 @@ import React from "react";
 import { Card, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { StatusTag } from "@/components/ui/StatusTag";
-import { TablePagination } from "@/components/common";
+import { SectionTitle, TablePagination } from "@/components/common";
 import type { ActionHistoryItem } from "@/types/app/importRequestA4";
 import { ACTION_HISTORY } from "./ImportRequestA4.config";
 
@@ -31,9 +31,7 @@ const columns: ColumnsType<ActionHistoryItem> = [
 export default function ActionHistoryTable() {
   return (
     <Card styles={{ body: { padding: 32 } }}>
-      <h2 className="m-0 mb-4 text-lg font-bold leading-7 text-black">
-        ประวัติการดำเนินการ
-      </h2>
+      <SectionTitle className="!mb-4">ประวัติการดำเนินการ</SectionTitle>
       <Table<ActionHistoryItem>
         className="app-table"
         columns={columns}

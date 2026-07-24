@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
-import { Layout, Badge, Space } from "antd";
+import { Layout, Badge, Space, Typography } from "antd";
 import { BellOutlined, DownOutlined } from "@ant-design/icons";
+import { brand } from "@/theme";
+
+const { Text } = Typography;
 
 /**
  * Crest logo exported from Figma. The remote asset URL expires ~7 days after
@@ -17,21 +20,36 @@ export default function NavBar() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={LOGO_SRC} alt="ตราสัญลักษณ์" className="h-12 w-auto shrink-0" />
       <div className="ml-2 min-w-0 flex-1">
-        <div className="truncate text-base font-bold leading-6 text-white">
+        <Text
+          strong
+          ellipsis
+          className="block"
+          style={{ color: "#fff", fontSize: 16, lineHeight: "24px" }}
+        >
           ระบบสารสนเทศโรงงานผลิตอาวุธของเอกชน สำหรับผู้ประกอบการ
-        </div>
-        <div className="truncate text-xs leading-[18px] text-[#F9E12F]">
+        </Text>
+        <Text
+          ellipsis
+          className="block"
+          style={{ color: brand.headerAccent, fontSize: 12, lineHeight: "18px" }}
+        >
           Private Arms Manufacturing Factory system สำหรับผู้ประกอบการ
-        </div>
+        </Text>
       </div>
       <Space size={8} className="shrink-0">
         <div className="text-right">
-          <div className="text-base leading-6 text-white">
+          <Text
+            className="block"
+            style={{ color: "#fff", fontSize: 16, lineHeight: "24px" }}
+          >
             บริษัท อาวุธ สมาร์ท โซลูชั่น จำกัด
-          </div>
-          <div className="text-sm leading-5 text-[#BEBEBE]">
+          </Text>
+          <Text
+            className="block"
+            style={{ color: brand.headerMuted, lineHeight: "20px" }}
+          >
             Version : 1.0.0
-          </div>
+          </Text>
         </div>
         <DownOutlined className="!text-white" />
         <Badge count={4} className="ml-3">

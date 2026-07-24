@@ -4,6 +4,7 @@ import React from "react";
 import { Breadcrumb } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import { SectionTitle } from "@/components/common";
 import {
   CREATE_BREADCRUMB_ITEMS,
   CREATE_PAGE_TITLE,
@@ -19,9 +20,7 @@ export default function CreateHeader() {
           className="cursor-pointer text-lg"
           onClick={() => router.back()}
         />
-        <h1 className="m-0 text-base font-bold leading-6 text-black">
-          {CREATE_PAGE_TITLE}
-        </h1>
+        <SectionTitle variant="page">{CREATE_PAGE_TITLE}</SectionTitle>
       </div>
     </div>
   );

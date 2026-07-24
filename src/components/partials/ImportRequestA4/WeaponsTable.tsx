@@ -10,7 +10,7 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import { StatusTag } from "@/components/ui/StatusTag";
-import { TablePagination } from "@/components/common";
+import { SectionTitle, TablePagination } from "@/components/common";
 import type { WeaponItem } from "@/types/app/importRequestA4";
 import { WEAPON_ITEMS } from "./ImportRequestA4.config";
 
@@ -62,9 +62,7 @@ export default function WeaponsTable() {
   return (
     <Card styles={{ body: { padding: 32 } }}>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h2 className="m-0 text-lg font-bold leading-7 text-black">
-          อาวุธหรือวัตถุที่ต้องการสั่งหรือนำเข้ามา
-        </h2>
+        <SectionTitle>อาวุธหรือวัตถุที่ต้องการสั่งหรือนำเข้ามา</SectionTitle>
         <Space wrap>
           <Button size="large">ปรับรายการ</Button>
           <Button size="large">พิมพ์รายงานอาวุธหรือวัตถุ</Button>

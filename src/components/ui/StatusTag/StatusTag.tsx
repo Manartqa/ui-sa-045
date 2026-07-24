@@ -2,11 +2,12 @@
 
 import React from "react";
 import { Tag } from "antd";
+import { brand } from "@/theme";
 import type { RequestStatus } from "@/types/app/importRequestA4";
 
 const STATUS_CONFIG: Record<RequestStatus, { label: string; color: string }> = {
-  CREATED: { label: "สร้างคำขอ", color: "#8B8E95" },
-  PENDING_REVIEW: { label: "รอตรวจสอบ", color: "#FAAD14" },
+  CREATED: { label: "สร้างคำขอ", color: brand.neutral },
+  PENDING_REVIEW: { label: "รอตรวจสอบ", color: brand.warning },
 };
 
 interface StatusTagProps {
