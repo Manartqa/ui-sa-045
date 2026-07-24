@@ -16,7 +16,7 @@ const GRAY_CURRENT = "#8C8C8C";
 export default function RequestSteps() {
   return (
     <div className="w-full overflow-x-auto pb-2">
-      <div className="flex min-w-[720px]">
+      <div className="mx-auto flex w-full min-w-[680px] max-w-[880px]">
         {STEPS.map((step, i) => {
           const isDone = i < ACTIVE_STEP_INDEX;
           const isCurrent = i === ACTIVE_STEP_INDEX;
