@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+  background: #f5f5f5;
+}
+
+/* Sidebar menu: allow long Thai labels to wrap like the design */
+.app-sidebar .ant-menu-item,
+.app-sidebar .ant-menu-submenu-title {
+  height: auto !important;
+  min-height: 40px;
+  line-height: 22px !important;
+  white-space: normal;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.app-sidebar .ant-menu-item .ant-menu-title-content,
+.app-sidebar .ant-menu-submenu-title .ant-menu-title-content {
+  white-space: normal;
+  line-height: 22px;
+}
+
+.app-sidebar .ant-menu-item-group-title {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Card-style tabs above the form container — separated bordered boxes */
+.request-tabs .ant-tabs-nav {
+  margin-bottom: 0;
+}
+
+.request-tabs .ant-tabs-nav-list {
+  gap: 8px;
+}
+
+.request-tabs > .ant-tabs-nav .ant-tabs-tab {
+  margin: 0 !important;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px 8px 0 0;
+  padding: 9px 24px;
+}
+
+.request-tabs > .ant-tabs-nav .ant-tabs-tab .ant-tabs-tab-btn {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 16px;
+}
+
+.request-tabs > .ant-tabs-nav .ant-tabs-tab-active {
+  border-bottom-color: #ffffff;
+}
+
+.request-tabs > .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: rgba(0, 0, 0, 0.88);
+  font-weight: 700;
+}
+
+/* "ข้อมูลโรงงาน" tab (2nd) — warning highlight */
+.request-tabs > .ant-tabs-nav .ant-tabs-nav-list > .ant-tabs-tab:nth-child(2) {
+  border-color: #faad14;
+}
+
+/* Checkbox/radio form rows: no extra control min-height */
+.compact-control .ant-form-item-control-input {
+  min-height: auto;
+}
+
+/* Table header like the design (light gray, compact) */
+.app-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 700;
+  white-space: nowrap;
+}
