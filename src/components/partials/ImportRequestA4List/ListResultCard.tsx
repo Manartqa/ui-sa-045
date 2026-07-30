@@ -4,12 +4,9 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { Button, Card, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import {
-  DeleteOutlined,
-  FilePdfOutlined,
-  FileSearchOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, FilePdfOutlined } from "@ant-design/icons";
 import { StatusTag } from "@/components/ui/StatusTag";
+import { FileSearchIcon } from "@/components/ui/icons";
 import { TablePagination } from "@/components/common";
 import { COMMON_TEXT } from "@/constant/text/common";
 import type { ImportRequestListItem } from "@/types/app/importRequestA4";
@@ -101,7 +98,7 @@ export default function ListResultCard({
         <Space size={8}>
           <Button
             type="primary"
-            icon={<FileSearchOutlined />}
+            icon={<FileSearchIcon />}
             aria-label="ดูรายละเอียด"
             onClick={() => router.push("/request/import-weapon-a4")}
           />

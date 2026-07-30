@@ -36,12 +36,12 @@ export const APP_CHROME_BY_ROLE: Record<
   { title: string; subtitle: string; accent: string }
 > = {
   admin: {
-    title: "ระบบจัดการฐานข้อมูลโรงงานผลิตอาวุธของเอกชน สำหรับเจ้าหน้าที่",
+    title: "ระบบจัดการฐานข้อมูลโรงงานผลิตอาวุธของเอกชน",
     subtitle: "Private Arms Manufacturing Factory system สำหรับเจ้าหน้าที่ฯ",
     accent: brand.loginAccent,
   },
   user: {
-    title: "ระบบสารสนเทศโรงงานผลิตอาวุธของเอกชน สำหรับผู้ประกอบการ",
+    title: "ระบบสารสนเทศโรงงานผลิตอาวุธของเอกชน",
     subtitle: "Private Arms Manufacturing Factory system สำหรับผู้ประกอบการ",
     accent: brand.headerAccent,
   },

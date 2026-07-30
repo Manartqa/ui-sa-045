@@ -155,7 +155,20 @@ export default function ListSearchCard({
           </Col>
         </Row>
         <Space className="mt-4">
-          <Button onClick={handleReset}>{BUTTON_TEXT.reset}</Button>
+          {/* Design: white fill, primary border and label, with antd's
+              control-outline shadow underneath. */}
+          <Button
+            color="primary"
+            variant="outlined"
+            onClick={handleReset}
+            // antd's large button rounds to 10; the design uses 8.
+            style={{
+              borderRadius: 8,
+              boxShadow: "0 2px 0 rgba(5, 145, 255, 0.1)",
+            }}
+          >
+            {BUTTON_TEXT.reset}
+          </Button>
           <Button type="primary" htmlType="submit" icon={<SearchOutlined />} />
         </Space>
       </Form>

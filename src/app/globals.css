@@ -75,9 +75,11 @@ body {
   color: #ffffff;
 }
 
+/* The selected submenu row gets a soft grey wash of its own — lighter than
+   the parent's band so the parent stays the stronger marker. */
 .app-sidebar .ant-menu .ant-menu-sub .ant-menu-item-selected {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
 }
 
 .app-sidebar .ant-menu-inline-collapsed .ant-menu-sub {

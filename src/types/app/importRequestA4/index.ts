@@ -5,7 +5,7 @@ export type RequestStatus =
   | "PENDING_REVIEW"
   | "SUBMITTED"
   | "RECEIVED"
-  | "PRESENTED"
+  | "UNDER_REVIEW"
   | "APPROVED"
   | "PAID"
   | "REJECTED"

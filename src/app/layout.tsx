@@ -13,7 +13,7 @@ const notoSansThai = Noto_Sans_Thai({
 });
 
 export const metadata: Metadata = {
-  title: "ระบบสารสนเทศโรงงานผลิตอาวุธของเอกชน สำหรับผู้ประกอบการ",
+  title: "ระบบสารสนเทศโรงงานผลิตอาวุธของเอกชน",
   description: "Private Arms Manufacturing Factory system สำหรับผู้ประกอบการ",
 };
 

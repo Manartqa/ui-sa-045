@@ -10,7 +10,7 @@ const STATUS_CONFIG: Record<RequestStatus, { label: string; color: string }> = {
   PENDING_REVIEW: { label: "รอตรวจสอบ", color: brand.warning },
   SUBMITTED: { label: "ยื่นคำขอ", color: brand.warning },
   RECEIVED: { label: "รับเรื่อง", color: "#1677FF" },
-  PRESENTED: { label: "นำเรียน", color: "#69B1FF" },
+  UNDER_REVIEW: { label: "อยู่ระหว่างพิจารณา", color: "#69B1FF" },
   APPROVED: { label: "อนุมัติ", color: "#00C259" },
   PAID: { label: "ชำระเงิน/จ่ายหนังสืออนุญาต", color: "#00C259" },
   REJECTED: { label: "ไม่อนุมัติ", color: brand.error },

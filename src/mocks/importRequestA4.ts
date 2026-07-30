@@ -47,7 +47,7 @@ export const IMPORT_REQUEST_ROWS: ImportRequestListItem[] = [
     requestNo: "22/2568",
     requestDate: "12/02/2568",
     operator: OPERATOR,
-    status: "PRESENTED",
+    status: "UNDER_REVIEW",
     permitNo: "",
     approvedDate: "",
     expireDate: "",
