@@ -34,10 +34,13 @@ export function UIProvider({ children }: { children: React.ReactNode }) {
           },
           Menu: {
             darkItemBg: brand.siderBg,
-            darkSubMenuItemBg: brand.siderBg,
+            // Open submenu sits on a slightly lighter panel than the rail
+            darkSubMenuItemBg: brand.siderSubMenuBg,
             darkPopupBg: brand.siderBg,
-            darkItemSelectedBg: "#1677FF",
+            darkItemSelectedBg: brand.siderItemSelectedBg,
+            darkGroupTitleColor: brand.siderGroupTitle,
             itemBorderRadius: 8,
+            groupTitleFontSize: 12,
           },
           Table: {
             headerBg: "#FAFAFA",

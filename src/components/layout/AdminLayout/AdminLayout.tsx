@@ -11,7 +11,9 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
-    <Layout className="min-h-screen">
+    // antd's runtime `.ant-layout { min-height: 0 }` beats Tailwind's
+    // `min-h-screen`, which left the sidebar rail short of the viewport.
+    <Layout style={{ minHeight: "100vh" }}>
       <NavBar />
       <Layout>
         <Sidebar />

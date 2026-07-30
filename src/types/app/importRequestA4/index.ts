@@ -1,6 +1,15 @@
 import type { ReactNode } from "react";
 
-export type RequestStatus = "CREATED" | "PENDING_REVIEW";
+export type RequestStatus =
+  | "CREATED"
+  | "PENDING_REVIEW"
+  | "SUBMITTED"
+  | "RECEIVED"
+  | "PRESENTED"
+  | "APPROVED"
+  | "PAID"
+  | "REJECTED"
+  | "RETURNED";
 
 export interface StepItem {
   no: string;
@@ -42,6 +51,37 @@ export interface EvidenceDocumentItem {
   expireDate: string;
   issuePlace: string;
   status: RequestStatus;
+}
+
+/** A row on the อ.4 request list screen. */
+export interface ImportRequestListItem {
+  key: string;
+  order: number;
+  referenceNo: string;
+  receiveNo: string;
+  receiveDate: string;
+  requestNo: string;
+  requestDate: string;
+  operator: string;
+  status: RequestStatus;
+  permitNo: string;
+  approvedDate: string;
+  expireDate: string;
+  /** Whether the issued permit PDF is available for download. */
+  hasPermitFile: boolean;
+}
+
+export interface ImportRequestListParams {
+  searchBy?: string;
+  keyword?: string;
+  status?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export interface ImportRequestListResult {
+  items: ImportRequestListItem[];
+  total: number;
 }
 
 export interface ActionHistoryItem {

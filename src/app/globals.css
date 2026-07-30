@@ -8,9 +8,17 @@ body {
   background: #f5f5f5;
 }
 
-/* Sidebar menu: allow long Thai labels to wrap like the design */
-.app-sidebar .ant-menu-item,
-.app-sidebar .ant-menu-submenu-title {
+/* Tailwind preflight is disabled (see tailwind.config.ts), so the UA body
+   margin has to go or full-bleed pages sit 8px off the edge. */
+body {
+  margin: 0;
+}
+
+/* Sidebar menu: allow long Thai labels to wrap like the design.
+   Expanded only — in the collapsed rail these would make every row as tall as
+   its wrapped label. */
+.app-sidebar .ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-item,
+.app-sidebar .ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu-title {
   height: auto !important;
   min-height: 40px;
   line-height: 22px !important;
@@ -19,14 +27,181 @@ body {
   padding-bottom: 8px;
 }
 
-.app-sidebar .ant-menu-item .ant-menu-title-content,
-.app-sidebar .ant-menu-submenu-title .ant-menu-title-content {
+.app-sidebar
+  .ant-menu:not(.ant-menu-inline-collapsed)
+  .ant-menu-item
+  .ant-menu-title-content,
+.app-sidebar
+  .ant-menu:not(.ant-menu-inline-collapsed)
+  .ant-menu-submenu-title
+  .ant-menu-title-content {
   white-space: normal;
   line-height: 22px;
 }
 
 .app-sidebar .ant-menu-item-group-title {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+}
+
+/* Selected row is a full-bleed band: antd insets menu items by 4px each side
+   and rounds them, which leaves a floating pill instead. Needs `.ant-menu` in
+   the selector — without it this ties antd's own rule at 0-2-0 and loses. */
+.app-sidebar .ant-menu .ant-menu-item,
+.app-sidebar .ant-menu .ant-menu-submenu-title {
+  width: 100%;
+  margin-inline: 0;
+  border-radius: 0;
+}
+
+/* Collapsed rail is icons only. antd keeps the group headings, the group
+   wrappers and the open inline submenu in the layout, which leaves uneven
+   vertical gaps between the icons — strip all of it and set one rhythm. */
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-item-group-title {
+  display: none;
+}
+
+/* Submenu rows line up with the main menu instead of being indented a level.
+   antd writes the indent as an inline style, so this needs !important. */
+.app-sidebar .ant-menu .ant-menu-sub .ant-menu-item {
+  padding-left: 24px !important;
+}
+
+/* When a submenu route is active the highlight belongs on the parent row
+   ("คำขออนุญาต"), not on the child that matched. antd marks the parent with
+   `-submenu-selected` but paints the child, so swap the two. */
+.app-sidebar .ant-menu .ant-menu-submenu-selected > .ant-menu-submenu-title {
+  background: #3a4257; /* brand.siderItemSelectedBg */
+  color: #ffffff;
+}
+
+.app-sidebar .ant-menu .ant-menu-sub .ant-menu-item-selected {
+  background: transparent;
   color: rgba(255, 255, 255, 0.65);
+}
+
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-sub {
+  display: none;
+}
+
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-item-group,
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-item-group-list,
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-submenu {
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide the label in the rail. Two reasons this needs the extra weight:
+   antd's own rule (`…-collapsed > .ant-menu-item .ant-menu-item-icon + span`,
+   specificity 0-3-1) only reaches items that are direct children of the menu
+   and merely sets `opacity: 0`, so the text still takes width and shoves the
+   icon out of the rail; items nested in a group are not covered at all. */
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-item .ant-menu-title-content,
+.app-sidebar
+  .ant-menu-inline-collapsed
+  .ant-menu-submenu-title
+  .ant-menu-title-content {
+  display: none !important;
+}
+
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-item,
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-submenu-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-height: 40px;
+  margin: 4px 0;
+  padding: 0;
+  line-height: 40px;
+}
+
+.app-sidebar .ant-menu-inline-collapsed .ant-menu-submenu-arrow {
+  display: none;
+}
+
+/* Operator rail runs brighter than antd's dark default (0.65 white) */
+.app-sidebar--operator .ant-menu .ant-menu-item,
+.app-sidebar--operator .ant-menu .ant-menu-submenu-title {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Collapse toggle sits on the dark rail, so it has to be white */
+.app-sidebar .app-sidebar-toggle {
+  color: #ffffff;
+}
+
+.app-sidebar .app-sidebar-toggle:hover,
+.app-sidebar .app-sidebar-toggle:focus {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Login fields on the dark panel — 48px tall, 8px radius, Black/Black-100
+   border, focus ring in Other/Input-500. antd scopes its own rules with
+   :where() (zero specificity), so these plain selectors win without
+   !important. */
+/* Design: 24px label row, then 8px, then the field. antd sizes the label to
+   the control height (40px at size="large"), which is too tall here. */
+.login-form .ant-form-item .ant-form-item-label {
+  padding-bottom: 4px;
+}
+
+.login-form .ant-form-item .ant-form-item-label > label {
+  height: 24px;
+}
+
+.login-form .ant-form-item .ant-input,
+.login-form .ant-form-item .ant-input-affix-wrapper {
+  height: 48px;
+  padding: 12px;
+  border: 1px solid #d1d2d4;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.login-form .ant-form-item .ant-input-affix-wrapper > .ant-input {
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.login-form .ant-form-item .ant-input:hover,
+.login-form .ant-form-item .ant-input:focus,
+.login-form .ant-form-item .ant-input-affix-wrapper:hover,
+.login-form .ant-form-item .ant-input-affix-wrapper-focused {
+  border-color: #3993ff;
+  box-shadow: none;
+}
+
+.login-form .ant-form-item .ant-input:focus,
+.login-form .ant-form-item .ant-input-affix-wrapper-focused {
+  border-width: 2px;
+  padding: 11px;
+}
+
+.login-form .ant-btn-primary {
+  height: 48px;
+  border-radius: 6px;
+}
+
+/* Validation text sits on the dark panel, so lighten it */
+.login-form .ant-form-item-explain-error {
+  color: #ffa39e;
+}
+
+/* Header account dropdown — dark panel like the sidebar.
+   Colors come from the Menu dark tokens in UIProvider; only the squared-off
+   rows and roomier padding from the design are overridden here. */
+.app-user-menu .ant-dropdown-menu .ant-dropdown-menu-item {
+  padding: 10px 20px;
+  border-radius: 0;
+  font-size: 16px;
+}
+
+.app-user-menu .ant-dropdown-menu .ant-dropdown-menu-item-icon {
+  font-size: 18px;
 }
 
 /* Card-style tabs above the form container — separated bordered boxes */

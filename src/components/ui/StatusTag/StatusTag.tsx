@@ -8,6 +8,13 @@ import type { RequestStatus } from "@/types/app/importRequestA4";
 const STATUS_CONFIG: Record<RequestStatus, { label: string; color: string }> = {
   CREATED: { label: "สร้างคำขอ", color: brand.neutral },
   PENDING_REVIEW: { label: "รอตรวจสอบ", color: brand.warning },
+  SUBMITTED: { label: "ยื่นคำขอ", color: brand.warning },
+  RECEIVED: { label: "รับเรื่อง", color: "#1677FF" },
+  PRESENTED: { label: "นำเรียน", color: "#69B1FF" },
+  APPROVED: { label: "อนุมัติ", color: "#00C259" },
+  PAID: { label: "ชำระเงิน/จ่ายหนังสืออนุญาต", color: "#00C259" },
+  REJECTED: { label: "ไม่อนุมัติ", color: brand.error },
+  RETURNED: { label: "ตีกลับ/แก้ไข", color: brand.error },
 };
 
 interface StatusTagProps {

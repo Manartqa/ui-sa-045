@@ -21,13 +21,29 @@ export const brand = {
 
   /** App chrome */
   headerBg: "#343D55",
+  /** Dark navy rail — also the header account dropdown panel */
   siderBg: "#272E40",
+  /** Open submenu panel — a step darker so it reads apart from the rail */
+  siderSubMenuBg: "#232936",
+  /** Selected menu row */
+  siderItemSelectedBg: "#3A4257",
+  /** Sidebar group headings ("ระบบคำขอ", "ระบบ", …) */
+  siderGroupTitle: "rgba(255,255,255,0.45)",
   /** Yellow English subtitle in the header */
   headerAccent: "#F9E12F",
   /** Muted version text in the header */
   headerMuted: "#BEBEBE",
   /** Page background behind the content area */
   contentBg: "#F5F5F5",
+
+  /** Login panel — cyan organisation line under the title */
+  loginAccent: "#8EFFFF",
+  /** Login panel — "ลืมรหัสผ่าน" link */
+  loginLink: "#00B2FF",
+  /** Login panel — input border (Black/Black - 100) */
+  loginInputBorder: "#D1D2D4",
+  /** Login panel — focused input border (Other/Input - 500) */
+  loginInputFocus: "#3993FF",
 } as const;
 
 export const FONT_FAMILY =
