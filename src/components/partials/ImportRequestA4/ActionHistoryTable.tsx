@@ -6,7 +6,6 @@ import type { ColumnsType } from "antd/es/table";
 import { StatusTag } from "@/components/ui/StatusTag";
 import { SectionTitle, TablePagination } from "@/components/common";
 import type { ActionHistoryItem } from "@/types/app/importRequestA4";
-import { ACTION_HISTORY } from "./ImportRequestA4.config";
 
 const columns: ColumnsType<ActionHistoryItem> = [
   { title: "#", dataIndex: "order", width: 60 },
@@ -28,18 +27,24 @@ const columns: ColumnsType<ActionHistoryItem> = [
   },
 ];
 
-export default function ActionHistoryTable() {
+interface ActionHistoryTableProps {
+  items: ActionHistoryItem[];
+}
+
+export default function ActionHistoryTable({
+  items,
+}: ActionHistoryTableProps) {
   return (
     <Card styles={{ body: { padding: 32 } }}>
       <SectionTitle className="!mb-4">ประวัติการดำเนินการ</SectionTitle>
       <Table<ActionHistoryItem>
         className="app-table"
         columns={columns}
-        dataSource={ACTION_HISTORY}
+        dataSource={items}
         pagination={false}
         size="middle"
       />
-      <TablePagination total={ACTION_HISTORY.length} />
+      <TablePagination total={items.length} />
     </Card>
   );
 }

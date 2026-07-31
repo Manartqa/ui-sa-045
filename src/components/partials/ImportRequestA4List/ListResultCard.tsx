@@ -18,12 +18,17 @@ interface ListResultCardProps {
   items: ImportRequestListItem[];
   total: number;
   loading?: boolean;
+  onDelete?: (row: ImportRequestListItem) => void;
+  /** Row currently being deleted — shows the spinner on that bin only. */
+  deletingKey?: string;
 }
 
 export default function ListResultCard({
   items,
   total,
   loading,
+  onDelete,
+  deletingKey,
 }: ListResultCardProps) {
   const router = useRouter();
 
@@ -100,7 +105,9 @@ export default function ListResultCard({
             type="primary"
             icon={<FileSearchIcon />}
             aria-label="ดูรายละเอียด"
-            onClick={() => router.push("/request/import-weapon-a4")}
+            onClick={() =>
+              router.push(`/request/import-weapon-a4/${row.key}`)
+            }
           />
           <Button
             danger
@@ -109,6 +116,8 @@ export default function ListResultCard({
             // Only a draft can be deleted — matches the design, where the bin
             // is greyed out on every row except "สร้างคำขอ".
             disabled={row.status !== "CREATED"}
+            loading={deletingKey === row.key}
+            onClick={() => onDelete?.(row)}
           />
         </Space>
       ),

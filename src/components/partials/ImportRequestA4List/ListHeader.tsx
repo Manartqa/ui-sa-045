@@ -10,9 +10,15 @@ import {
 
 interface ListHeaderProps {
   onCreate?: () => void;
+  onResetDemo?: () => void;
+  resetting?: boolean;
 }
 
-export default function ListHeader({ onCreate }: ListHeaderProps) {
+export default function ListHeader({
+  onCreate,
+  onResetDemo,
+  resetting,
+}: ListHeaderProps) {
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
       <div className="min-w-0">
@@ -21,9 +27,15 @@ export default function ListHeader({ onCreate }: ListHeaderProps) {
           {LIST_PAGE_TITLE}
         </SectionTitle>
       </div>
-      <Button type="primary" size="large" className="shrink-0" onClick={onCreate}>
-        เพิ่มคำขอ
-      </Button>
+      <div className="flex shrink-0 items-center gap-2">
+        {/* Demo-only escape hatch: the mock store is persistent now. */}
+        <Button size="large" loading={resetting} onClick={onResetDemo}>
+          รีเซ็ตข้อมูลเดโม
+        </Button>
+        <Button type="primary" size="large" onClick={onCreate}>
+          เพิ่มคำขอ
+        </Button>
+      </div>
     </div>
   );
 }

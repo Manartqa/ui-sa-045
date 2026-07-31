@@ -3,29 +3,36 @@
 import React from "react";
 import { Card, Row, Col } from "antd";
 import { InfoField } from "@/components/common";
-import { REFERENCE_INFO } from "./ImportRequestA4.config";
+import type { ImportRequestRecord } from "@/types/app/importRequestA4";
 
-export default function ReferenceCard() {
+/** Blank office-side fields read as "-" here, unlike the list's empty cells. */
+const dash = (value: string) => value || "-";
+
+interface ReferenceCardProps {
+  record: ImportRequestRecord;
+}
+
+export default function ReferenceCard({ record }: ReferenceCardProps) {
   return (
     <Card styles={{ body: { padding: 32 } }}>
       <Row gutter={[16, 24]}>
         <Col xs={24} md={8}>
-          <InfoField label="เลขที่อ้างอิง" value={REFERENCE_INFO.referenceNo} />
+          <InfoField label="เลขที่อ้างอิง" value={dash(record.referenceNo)} />
         </Col>
         <Col xs={24} md={8}>
-          <InfoField label="เลขที่รับเรื่อง" value={REFERENCE_INFO.receiveNo} />
+          <InfoField label="เลขที่รับเรื่อง" value={dash(record.receiveNo)} />
         </Col>
         <Col xs={24} md={8}>
           <InfoField
             label="วันที่รับเรื่อง(วันที่เอกสาร)"
-            value={REFERENCE_INFO.receiveDate}
+            value={dash(record.receiveDate)}
           />
         </Col>
         <Col xs={24} md={8}>
-          <InfoField label="เลขที่คำขอ" value={REFERENCE_INFO.requestNo} />
+          <InfoField label="เลขที่คำขอ" value={dash(record.requestNo)} />
         </Col>
         <Col xs={24} md={8}>
-          <InfoField label="วันที่คำขอ" value={REFERENCE_INFO.requestDate} />
+          <InfoField label="วันที่คำขอ" value={dash(record.requestDate)} />
         </Col>
       </Row>
     </Card>

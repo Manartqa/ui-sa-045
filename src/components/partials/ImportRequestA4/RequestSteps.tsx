@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
-import { STEPS, ACTIVE_STEP_INDEX, STEP_COLORS } from "./ImportRequestA4.config";
+import { stepIndexOf } from "@/constant/requestStatus";
+import type { RequestStatus } from "@/types/app/importRequestA4";
+import { STEPS, STEP_COLORS } from "./ImportRequestA4.config";
 
 /**
  * Progress stepper for the request lifecycle — Figma node 4025:190464.
@@ -15,12 +17,19 @@ import { STEPS, ACTIVE_STEP_INDEX, STEP_COLORS } from "./ImportRequestA4.config"
  * spelled out — the circle would otherwise measure 38px and the label would
  * keep its UA margin.
  */
-export default function RequestSteps() {
+interface RequestStepsProps {
+  /** Which circle is current is derived from this — never passed in directly. */
+  status: RequestStatus;
+}
+
+export default function RequestSteps({ status }: RequestStepsProps) {
+  const currentStep = stepIndexOf(status);
+
   return (
     <div className="w-full overflow-x-auto">
       <div className="flex items-end justify-center pb-8">
         {STEPS.map((step, index) => {
-          const isActive = index === ACTIVE_STEP_INDEX;
+          const isActive = index === currentStep;
           const isLast = index === STEPS.length - 1;
 
           return (

@@ -1,3 +1,8 @@
+import {
+  REQUEST_STATUS_META,
+  REQUEST_STATUS_ORDER,
+} from "@/constant/requestStatus";
+
 export const LIST_STORAGE_KEY = "import-request-a4-list-filters";
 
 export const DEFAULT_FILTERS = {
@@ -28,22 +33,14 @@ export const SEARCH_BY_OPTIONS = [
 export const STATUS_ALL = "all";
 
 /**
- * Request lifecycle statuses for the filter. Codes reuse `RequestStatus` where
- * one exists; the four fee-related steps have no tag colour yet, so they carry
- * their own codes until the status model covers them.
+ * Built from the status model so the filter can never drift from the tags —
+ * every option here is a status the list is actually able to render.
  */
 export const STATUS_OPTIONS = [
   { value: STATUS_ALL, label: "ทั้งหมด" },
-  { value: "CREATED", label: "สร้างคำขอ" },
-  { value: "RETURNED", label: "ตีกลับ/แก้ไข" },
-  { value: "SUBMITTED", label: "ยื่นคำขอ" },
-  { value: "RECEIVED", label: "รับเรื่อง" },
-  { value: "AWAITING_REQUEST_FEE", label: "รอชำระค่าคำขอ" },
-  { value: "REQUEST_FEE_PAID", label: "ชำระค่าคำขอแล้ว" },
-  { value: "UNDER_REVIEW", label: "อยู่ระหว่างพิจารณา" },
-  { value: "REJECTED", label: "ไม่อนุมัติ" },
-  { value: "APPROVED", label: "อนุมัติ" },
-  { value: "AWAITING_PERMIT_FEE", label: "รอชำระค่าใบอนุญาต" },
-  { value: "PAID", label: "ชำระเงิน/จ่ายหนังสืออนุญาต" },
+  ...REQUEST_STATUS_ORDER.map((status) => ({
+    value: status,
+    label: REQUEST_STATUS_META[status].label,
+  })),
 ];
 

@@ -1,26 +1,30 @@
 "use client";
 
 import React from "react";
-import { Tabs, Card, Row, Col, Divider, Button, Typography, theme } from "antd";
+import { Tabs, Card, Row, Col, Divider, Button } from "antd";
 import { InfoField, SectionTitle } from "@/components/common";
-import {
-  APPLICATION_FORM,
-  OFFICE_INFO,
-  REGISTRATION_INFO,
-} from "./ImportRequestA4.config";
+import { sectionStatusOf } from "@/constant/requestWorkflow";
+import type { ImportRequestRecord } from "@/types/app/importRequestA4";
+import { APPLICATION_FORM_TITLE } from "./ImportRequestA4.config";
+import SectionStatus from "./SectionStatus";
+import WeaponsTable from "./WeaponsTable";
+import PermitTable from "./PermitTable";
+import DocumentsTable from "./DocumentsTable";
+import FactoryTab from "./FactoryTab";
+import PersonsTab from "./PersonsTab";
+import UploadDocumentsTab from "./UploadDocumentsTab";
 
-const { Text } = Typography;
-
-function FormContent() {
-  const { token } = theme.useToken();
+function FormContent({ record }: { record: ImportRequestRecord }) {
+  const APPLICATION_FORM = record.form;
+  const OFFICE_INFO = record.office;
+  const REGISTRATION_INFO = record.registration;
 
   return (
     <Card className="!rounded-tl-none" styles={{ body: { padding: 32 } }}>
       <div className="flex items-center justify-between gap-4">
-        <SectionTitle>{APPLICATION_FORM.title}</SectionTitle>
-        <Text className="shrink-0" style={{ color: token.colorWarning }}>
-          รอตรวจสอบ
-        </Text>
+        <SectionTitle>{APPLICATION_FORM_TITLE}</SectionTitle>
+        {/* Requirement 6: the card's own status, derived from the request. */}
+        <SectionStatus status={sectionStatusOf(record.status)} />
       </div>
 
       <Row gutter={[16, 24]} className="mt-6">
@@ -178,23 +182,63 @@ function FormContent() {
   );
 }
 
-export default function RequestFormTab() {
+interface RequestFormTabProps {
+  record: ImportRequestRecord;
+}
+
+/**
+ * The four data tabs. Which cards belong to which tab comes from the Figma
+ * screens: อาวุธ/หนังสืออนุญาต sit under แบบคำขอ only, ข้อมูลเอกสารหลักฐาน
+ * repeats under the first three, and อัพโหลดเอกสาร replaces it on its own tab.
+ */
+export default function RequestFormTab({ record }: RequestFormTabProps) {
+  const evidence = <DocumentsTable record={record} />;
+
   return (
     <Tabs
       type="card"
       className="request-tabs"
       defaultActiveKey="form"
       items={[
-        { key: "form", label: "แบบคำขอ", children: <FormContent /> },
+        {
+          key: "form",
+          label: "แบบคำขอ",
+          children: (
+            <div className="flex flex-col gap-6">
+              <FormContent record={record} />
+              <WeaponsTable record={record} />
+              <PermitTable record={record} />
+              {evidence}
+            </div>
+          ),
+        },
         {
           // `tab-attention` is the hook for the orange treatment in
           // globals.css — the colour belongs with the other tab styling.
           key: "factory",
           label: <span className="tab-attention">ข้อมูลโรงงาน</span>,
-          children: null,
+          children: (
+            <div className="flex flex-col gap-6">
+              <FactoryTab record={record} />
+              {evidence}
+            </div>
+          ),
         },
-        { key: "person", label: "ข้อมูลบุคคล", children: null },
-        { key: "documents", label: "อัพโหลดเอกสาร", children: null },
+        {
+          key: "person",
+          label: "ข้อมูลบุคคล",
+          children: (
+            <div className="flex flex-col gap-6">
+              <PersonsTab record={record} />
+              {evidence}
+            </div>
+          ),
+        },
+        {
+          key: "documents",
+          label: "อัพโหลดเอกสาร",
+          children: <UploadDocumentsTab record={record} />,
+        },
       ]}
     />
   );

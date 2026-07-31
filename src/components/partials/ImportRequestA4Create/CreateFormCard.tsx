@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
+import { thaiDateToDayjs, toIsoDate } from "@/lib/date";
 import {
   Card,
   Form,
@@ -32,12 +32,6 @@ import {
   type PermitA2Item,
 } from "./Modal";
 
-/** "04/01/2572" (พ.ศ.) → dayjs ค.ศ. */
-function thaiDateToDayjs(d: string) {
-  const [dd, mm, yy] = d.split("/").map(Number);
-  const year = yy > 2400 ? yy - 543 : yy;
-  return dayjs(new Date(year, mm - 1, dd));
-}
 
 function RequiredNote() {
   return (
@@ -46,11 +40,6 @@ function RequiredNote() {
       <Typography.Text>ต้องเลือกอย่างน้อยหนึ่งรายการ</Typography.Text>
     </div>
   );
-}
-
-/** dayjs → ISO ค.ศ. for the service layer; undefined stays empty. */
-function toIso(d?: dayjs.Dayjs) {
-  return d?.isValid() ? d.format("YYYY-MM-DD") : "";
 }
 
 export default function CreateFormCard() {
@@ -94,8 +83,8 @@ export default function CreateFormCard() {
     try {
       const created = await createRequest({
         referencePermitNo: v.referencePermitNo,
-        permitDate: toIso(v.permitDate),
-        expireDate: toIso(v.expireDate),
+        permitDate: toIsoDate(v.permitDate),
+        expireDate: toIsoDate(v.expireDate),
         writtenAt: v.writtenAt,
         requestFor: v.requestFor ?? [],
         useFor: v.useFor ?? [],
@@ -103,8 +92,8 @@ export default function CreateFormCard() {
       });
       setConfirmOpen(false);
       message.success(`สร้างคำขอสำเร็จ เลขที่อ้างอิง ${created.referenceNo}`);
-      // Land on the list so the new draft row is visible.
-      router.push("/request/import-weapon-a4/list");
+      // Straight into the new draft — the operator's next step is filling it in.
+      router.push(`/request/import-weapon-a4/${created.id}`);
     } catch {
       setConfirmOpen(false);
       message.error("สร้างคำขอไม่สำเร็จ");

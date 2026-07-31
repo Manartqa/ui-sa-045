@@ -3,24 +3,31 @@
 import React from "react";
 import { Breadcrumb, Typography, theme } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
 import { StatusTag } from "@/components/ui/StatusTag";
-import {
-  BREADCRUMB_ITEMS,
-  PAGE_TITLE,
-  REQUEST_META,
-} from "./ImportRequestA4.config";
+import { toThaiDateTime } from "@/lib/date";
+import type { ImportRequestRecord } from "@/types/app/importRequestA4";
+import { BREADCRUMB_ITEMS, PAGE_TITLE } from "./ImportRequestA4.config";
 
 const { Text, Title } = Typography;
 
-export default function RequestHeader() {
+interface RequestHeaderProps {
+  record: ImportRequestRecord;
+}
+
+export default function RequestHeader({ record }: RequestHeaderProps) {
   const { token } = theme.useToken();
+  const router = useRouter();
 
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
       <div className="min-w-0">
         <Breadcrumb items={BREADCRUMB_ITEMS} />
         <div className="mt-1 flex items-center gap-2">
-          <LeftOutlined className="text-lg" />
+          <LeftOutlined
+            className="cursor-pointer text-lg"
+            onClick={() => router.push("/request/import-weapon-a4/list")}
+          />
           <Title level={5} style={{ margin: 0 }}>
             {PAGE_TITLE}
           </Title>
@@ -37,16 +44,16 @@ export default function RequestHeader() {
         >
           <div className="flex gap-2">
             <Text>สร้างข้อมูล:</Text>
-            <Text>{REQUEST_META.createdAt}</Text>
+            <Text>{toThaiDateTime(record.createdAt)}</Text>
           </div>
           <div className="mt-2 flex gap-2">
             <Text>ปรับปรุงล่าสุด:</Text>
-            <Text>{REQUEST_META.updatedAt}</Text>
+            <Text>{toThaiDateTime(record.updatedAt)}</Text>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Text>สถานะ:</Text>
-          <StatusTag status="CREATED" />
+          <StatusTag status={record.status} />
         </div>
       </div>
     </div>

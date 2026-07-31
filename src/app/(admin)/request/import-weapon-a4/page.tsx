@@ -1,5 +1,6 @@
-import { ImportRequestA4Content } from "@/components/partials/ImportRequestA4";
+import { redirect } from "next/navigation";
 
+/** A request is always viewed by id now — bare `/import-weapon-a4` is the list. */
 export default function ImportWeaponA4Page() {
-  return <ImportRequestA4Content />;
+  redirect("/request/import-weapon-a4/list");
 }
