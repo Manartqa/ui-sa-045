@@ -10,10 +10,8 @@ import {
   DashboardOutlined,
   ReadOutlined,
   ApiOutlined,
-  ToolOutlined,
   HomeFilled,
   WalletOutlined,
-  BuildOutlined,
   TableOutlined,
   BookOutlined,
 } from "@ant-design/icons";
@@ -138,23 +136,6 @@ const OPERATOR_MENU_ITEMS: MenuProps["items"] = [
         key: "payment-notices",
         icon: <WalletOutlined />,
         label: "รายการแจ้งชำระเงิน",
-      },
-    ],
-  },
-  {
-    key: "grp-factory",
-    type: "group",
-    label: "ข้อมูลโรงงาน",
-    children: [
-      {
-        key: "warehouse-info",
-        icon: <BuildOutlined />,
-        label: "ข้อมูลคลัง/อาคาร",
-      },
-      {
-        key: "machines",
-        icon: <ToolOutlined />,
-        label: "รายการเครื่องจักร",
       },
     ],
   },
