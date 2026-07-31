@@ -10,11 +10,13 @@ import {
   DashboardOutlined,
   ReadOutlined,
   ApiOutlined,
-  HomeFilled,
-  WalletOutlined,
-  TableOutlined,
-  BookOutlined,
 } from "@ant-design/icons";
+import {
+  HomeIcon,
+  ManualBookIcon,
+  PaymentCardIcon,
+  StepsListIcon,
+} from "@/components/ui/icons";
 import { brand } from "@/theme";
 import type { UserRole } from "@/types/app/auth";
 
@@ -105,10 +107,9 @@ const REQUEST_FORM_ITEMS: MenuProps["items"] = [
 
 /** Operator (ผู้ประกอบการ) rail. */
 const OPERATOR_MENU_ITEMS: MenuProps["items"] = [
-  // Icons picked to match the operator design: solid home, wallet for the
-  // payment list, a building block for warehouses, a table for the steps guide
-  // and a closed book for the manual.
-  { key: "home", icon: <HomeFilled />, label: "หน้าหลัก" },
+  // Icons come from the design system's SVG set (components/ui/icons), not
+  // @ant-design/icons — the glyphs differ.
+  { key: "home", icon: <HomeIcon />, label: "หน้าหลัก" },
   {
     key: "grp-request",
     type: "group",
@@ -134,7 +135,7 @@ const OPERATOR_MENU_ITEMS: MenuProps["items"] = [
       },
       {
         key: "payment-notices",
-        icon: <WalletOutlined />,
+        icon: <PaymentCardIcon />,
         label: "รายการแจ้งชำระเงิน",
       },
     ],
@@ -146,12 +147,12 @@ const OPERATOR_MENU_ITEMS: MenuProps["items"] = [
     children: [
       {
         key: "manual-steps",
-        icon: <TableOutlined />,
+        icon: <StepsListIcon />,
         label: "6 ขั้นตอนการยื่นคำขออนุญาต",
       },
       {
         key: "manual-operator",
-        icon: <BookOutlined />,
+        icon: <ManualBookIcon />,
         label: "คู่มือการใช้งานสำหรับผู้ประกอบการ",
       },
     ],

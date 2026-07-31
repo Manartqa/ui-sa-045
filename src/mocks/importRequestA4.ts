@@ -1,6 +1,8 @@
 import type { ImportRequestListItem } from "@/types/app/importRequestA4";
 
-const OPERATOR = "บริษัท อาวุธ สมาร์ท โซลูชั่น จำกัด";
+export const IMPORT_REQUEST_OPERATOR = "บริษัท อาวุธ สมาร์ท โซลูชั่น จำกัด";
+
+const OPERATOR = IMPORT_REQUEST_OPERATOR;
 
 /**
  * Mock rows copied from the Figma list example (node 4410:156324). The `order`
@@ -132,3 +134,52 @@ export const IMPORT_REQUEST_ROWS: ImportRequestListItem[] = [
 
 /** Total across all pages, as shown in the design's pagination. */
 export const IMPORT_REQUEST_TOTAL = 200;
+
+/**
+ * Rows added by the create form. There is no backend, so they live in
+ * `sessionStorage` — the fixture above stays untouched and the mock survives a
+ * reload but resets when the tab closes, same as the mock auth session.
+ */
+const CREATED_ROWS_KEY = "sa045.importRequestA4.created";
+
+function readCreatedRows(): ImportRequestListItem[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = sessionStorage.getItem(CREATED_ROWS_KEY);
+    return raw ? (JSON.parse(raw) as ImportRequestListItem[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeCreatedRows(rows: ImportRequestListItem[]) {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem(CREATED_ROWS_KEY, JSON.stringify(rows));
+}
+
+/** The fixture plus everything created in this session, in list order. */
+export function getImportRequestRows(): ImportRequestListItem[] {
+  return [...IMPORT_REQUEST_ROWS, ...readCreatedRows()];
+}
+
+export function getImportRequestTotal(): number {
+  return IMPORT_REQUEST_TOTAL + readCreatedRows().length;
+}
+
+/** Appends a created row, filling in its `key` and record number. */
+export function addImportRequestRow(
+  row: Omit<ImportRequestListItem, "key" | "order">,
+): ImportRequestListItem {
+  const created = readCreatedRows();
+  const lastOrder = [...IMPORT_REQUEST_ROWS, ...created].reduce(
+    (max, item) => Math.max(max, item.order),
+    0,
+  );
+  const item: ImportRequestListItem = {
+    ...row,
+    key: `created-${lastOrder + 1}`,
+    order: lastOrder + 1,
+  };
+  writeCreatedRows([...created, item]);
+  return item;
+}

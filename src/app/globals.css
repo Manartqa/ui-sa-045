@@ -71,7 +71,7 @@ body {
    ("คำขออนุญาต"), not on the child that matched. antd marks the parent with
    `-submenu-selected` but paints the child, so swap the two. */
 .app-sidebar .ant-menu .ant-menu-submenu-selected > .ant-menu-submenu-title {
-  background: #3a4257; /* brand.siderItemSelectedBg */
+  background: #343d55; /* brand.siderItemSelectedBg */
   color: #ffffff;
 }
 
@@ -122,10 +122,19 @@ body {
   display: none;
 }
 
-/* Operator rail runs brighter than antd's dark default (0.65 white) */
-.app-sidebar--operator .ant-menu .ant-menu-item,
-.app-sidebar--operator .ant-menu .ant-menu-submenu-title {
+/* Operator rail runs brighter than antd's dark default (0.65 white).
+   The extra `.ant-menu-dark` beats antd's own 0-3-0 rules. */
+.app-sidebar--operator .ant-menu.ant-menu-dark .ant-menu-item,
+.app-sidebar--operator .ant-menu.ant-menu-dark .ant-menu-submenu-title {
   color: rgba(255, 255, 255, 0.85);
+}
+
+/* Most rail icons are design-system SVGs at 16px; keep the remaining antd
+   glyphs the same size and colour so the column reads as one set. */
+.app-sidebar--operator .ant-menu .ant-menu-item .ant-menu-item-icon,
+.app-sidebar--operator .ant-menu .ant-menu-submenu-title .ant-menu-item-icon {
+  font-size: 16px;
+  color: inherit;
 }
 
 /* Collapse toggle sits on the dark rail, so it has to be white */

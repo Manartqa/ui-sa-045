@@ -71,6 +71,17 @@ export interface ImportRequestListItem {
   hasPermitFile: boolean;
 }
 
+/** What the อ.4 create form submits. Dates are ISO (`YYYY-MM-DD`, ค.ศ.). */
+export interface ImportRequestCreatePayload {
+  referencePermitNo: string;
+  permitDate: string;
+  expireDate: string;
+  writtenAt?: string;
+  requestFor: string[];
+  useFor: string[];
+  purpose: string;
+}
+
 export interface ImportRequestListParams {
   searchBy?: string;
   keyword?: string;

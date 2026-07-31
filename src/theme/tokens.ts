@@ -25,8 +25,8 @@ export const brand = {
   siderBg: "#272E40",
   /** Open submenu panel — a step darker so it reads apart from the rail */
   siderSubMenuBg: "#232936",
-  /** Selected menu row */
-  siderItemSelectedBg: "#3A4257",
+  /** Selected menu row — a subtle step up from the rail, same tone as the header */
+  siderItemSelectedBg: "#343D55",
   /** Sidebar group headings ("ระบบคำขอ", "ระบบ", …) */
   siderGroupTitle: "rgba(255,255,255,0.45)",
   /** Yellow English subtitle in the header */
