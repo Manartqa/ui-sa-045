@@ -179,8 +179,6 @@ function FormContent() {
 }
 
 export default function RequestFormTab() {
-  const { token } = theme.useToken();
-
   return (
     <Tabs
       type="card"
@@ -189,12 +187,10 @@ export default function RequestFormTab() {
       items={[
         { key: "form", label: "แบบคำขอ", children: <FormContent /> },
         {
+          // `tab-attention` is the hook for the orange treatment in
+          // globals.css — the colour belongs with the other tab styling.
           key: "factory",
-          label: (
-            <Text strong style={{ color: token.colorWarning }}>
-              ข้อมูลโรงงาน
-            </Text>
-          ),
+          label: <span className="tab-attention">ข้อมูลโรงงาน</span>,
           children: null,
         },
         { key: "person", label: "ข้อมูลบุคคล", children: null },

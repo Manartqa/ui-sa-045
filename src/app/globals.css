@@ -230,40 +230,68 @@ body {
   font-size: 16px;
 }
 
-/* Card-style tabs above the form container — separated bordered boxes */
-.request-tabs .ant-tabs-nav {
+/* Card-style tabs above the form container — Figma node 4025:190490.
+   Square boxes, 40px tall, 4px apart, all in the same grey; only the active
+   one drops its bottom line so it reads as part of the panel below. */
+/* antd puts a 16px margin under the nav; without the extra `.ant-tabs` this
+   ties its rule and loses, leaving the strip floating above the card. `z-index`
+   lets the active tab paint over the card's own top border. */
+.ant-tabs.request-tabs > .ant-tabs-nav {
   margin-bottom: 0;
+  z-index: 1;
 }
 
-.request-tabs .ant-tabs-nav-list {
-  gap: 8px;
+.ant-tabs.request-tabs > .ant-tabs-nav .ant-tabs-nav-list {
+  gap: 4px;
 }
 
-.request-tabs > .ant-tabs-nav .ant-tabs-tab {
+/* The `.ant-tabs.ant-tabs-card` prefix is load-bearing: antd's card-tab rules
+   score 0-4-0 and its cssinjs <style> is injected after this sheet, so anything
+   that merely ties loses. This chain scores 0-5-0.
+   `border-radius` additionally carries `!important` — antd emits several
+   radius rules for card tabs (including :first-child/:last-child variants that
+   reach 0-5-0 on their own), and square corners are a hard requirement. */
+.ant-tabs.ant-tabs-card.request-tabs > .ant-tabs-nav .ant-tabs-tab {
   margin: 0 !important;
+  height: 40px;
   background: #ffffff;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px 8px 0 0;
-  padding: 9px 24px;
+  border: 1px solid #a2a2a2;
+  border-radius: 0 !important;
+  padding: 0 20px;
 }
 
-.request-tabs > .ant-tabs-nav .ant-tabs-tab .ant-tabs-tab-btn {
-  color: rgba(0, 0, 0, 0.45);
+/* The design keeps the active tab the same grey as the others — the missing
+   bottom line is the only marker, so no colour or weight change here. Needs to
+   outscore antd's `…-tab.ant-tabs-tab-active .ant-tabs-tab-btn` (0-4-0). */
+.ant-tabs.ant-tabs-card.request-tabs
+  > .ant-tabs-nav
+  .ant-tabs-tab
+  .ant-tabs-tab-btn {
+  color: #a2a2a2;
   font-size: 16px;
+  font-weight: 400;
 }
 
-.request-tabs > .ant-tabs-nav .ant-tabs-tab-active {
+/* The active tab sits 1px into the card and hides its own bottom line, so the
+   two read as one shape. `!important` because the rule above zeroes margins. */
+.ant-tabs.ant-tabs-card.request-tabs > .ant-tabs-nav .ant-tabs-tab-active {
+  margin-bottom: -1px !important;
   border-bottom-color: #ffffff;
 }
 
-.request-tabs > .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: rgba(0, 0, 0, 0.88);
-  font-weight: 700;
+/* "ข้อมูลโรงงาน" — flagged in Colors/Orange. Keyed off the label's class
+   instead of nth-child so reordering the tabs cannot move the highlight. */
+.ant-tabs.ant-tabs-card.request-tabs
+  > .ant-tabs-nav
+  .ant-tabs-tab:has(.tab-attention) {
+  border-color: #ff9500;
 }
 
-/* "ข้อมูลโรงงาน" tab (2nd) — warning highlight */
-.request-tabs > .ant-tabs-nav .ant-tabs-nav-list > .ant-tabs-tab:nth-child(2) {
-  border-color: #faad14;
+.ant-tabs.ant-tabs-card.request-tabs
+  > .ant-tabs-nav
+  .ant-tabs-tab:has(.tab-attention)
+  .ant-tabs-tab-btn {
+  color: #ff9500;
 }
 
 /* Checkbox/radio form rows: no extra control min-height */
