@@ -31,6 +31,7 @@ export const SIDEBAR_COLLAPSED_WIDTH = 80;
 
 export const APP_VERSION = "Version : 1.0.0";
 
+
 /** Shown in the header before the session is read (or when signed out). */
 export const FALLBACK_USER_NAME = "ผู้ใช้งาน";
 
