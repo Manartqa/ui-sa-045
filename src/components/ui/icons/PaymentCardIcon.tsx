@@ -1,9 +1,11 @@
 import React from "react";
 
-/** "รายการแจ้งชำระเงิน" — payment card from the design system. */
-export default function PaymentCardIcon() {
+/** "รายการแจ้งชำระเงิน" — payment card from the design system. Props go to the
+ *  `<svg>` so antd's `ant-menu-item-icon` class (and its gap) lands. */
+export default function PaymentCardIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      {...props}
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"

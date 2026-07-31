@@ -61,6 +61,43 @@ is a mock in `src/lib/auth.ts` + `src/mocks/users.ts` (`admin` / `user`, both
 - Brand colors live in `src/theme/tokens.ts`; antd semantic tokens are fed
   through `UIProvider`.
 
+## App chrome is frozen
+
+The header (`AdminLayout/Header`) and sidebar (`AdminLayout/Sidebar`) are
+settled. **Adding a page means adding a menu entry, not restyling the chrome** —
+do not change widths, colours, icon sizes, or spacing unless that is the task.
+
+- `SIDEBAR_WIDTH = 264` fits the longest top-level Thai label on one line
+  (`คู่มือการใช้งานสำหรับผู้ประกอบการ` = 192px + icon/padding). Submenu labels
+  wrap on purpose — they run past 450px.
+- Icons in `src/components/ui/icons/` take `React.SVGProps<SVGSVGElement>` and
+  spread onto `<svg>`. antd clones the icon to attach `ant-menu-item-icon` /
+  `ant-dropdown-menu-item-icon`, which carries the 10px gap before the label; an
+  icon that swallows props renders flush against its text.
+- Selected row background is `brand.siderItemSelectedBg` (#343D55) for both the
+  main menu and submenu rows.
+- `.ant-dropdown.app-user-menu` clears the inline `min-width` rc-dropdown copies
+  from the trigger, so a long display name cannot stretch the account panel.
+
+New entries go in `SIDEBAR_MENU_BY_ROLE` and `MENU_ROUTES` in
+`AdminLayout.config.tsx`.
+
+## Modals follow one box
+
+`ImportRequestA4Create/Modal/ConfirmCreateModal.tsx` is the template — **a new
+modal changes the copy, not the box.**
+
+- `width={400}` (= 352 content + antd's default `20px 24px` padding), `centered`,
+  `footer={null}`, `closable={false}`.
+- Status icon: a 63×63 disc filled with `token.colorPrimary`, glyph at 28px. The
+  Figma frame is 72px with the vector inset 4.5px; the flex gap covers the inset.
+- Footer buttons are `size="large"` — 40px tall, 15px inline padding, 16px font.
+  Do not hardcode button dimensions.
+
+Known gap: the design's radius is 8, antd renders 10 (`borderRadius: 8` →
+`borderRadiusLG = 10`). Overriding `components.Modal.borderRadiusLG` changes
+every modal, so it is a deliberate call, not a drive-by fix.
+
 ## Routes
 
 - `(auth)/login/officer` — เจ้าหน้าที่ (accepts `admin` only)

@@ -15,9 +15,11 @@ import {
   Select,
   Divider,
   Typography,
+  App,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { SectionTitle } from "@/components/common";
+import { useCreateImportRequestA4 } from "@/hooks/importRequestA4";
 import {
   APPLICANT_PLACEHOLDERS,
   REQUEST_FOR_OPTIONS,
@@ -46,8 +48,15 @@ function RequiredNote() {
   );
 }
 
+/** dayjs → ISO ค.ศ. for the service layer; undefined stays empty. */
+function toIso(d?: dayjs.Dayjs) {
+  return d?.isValid() ? d.format("YYYY-MM-DD") : "";
+}
+
 export default function CreateFormCard() {
   const router = useRouter();
+  const { message } = App.useApp();
+  const { createRequest, isCreating } = useCreateImportRequestA4();
   const [form] = Form.useForm();
   const [searchOpen, setSearchOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -80,9 +89,26 @@ export default function CreateFormCard() {
     setConfirmOpen(true);
   };
 
-  const handleConfirmCreate = () => {
-    setConfirmOpen(false);
-    router.push("/request/import-weapon-a4");
+  const handleConfirmCreate = async () => {
+    const v = form.getFieldsValue();
+    try {
+      const created = await createRequest({
+        referencePermitNo: v.referencePermitNo,
+        permitDate: toIso(v.permitDate),
+        expireDate: toIso(v.expireDate),
+        writtenAt: v.writtenAt,
+        requestFor: v.requestFor ?? [],
+        useFor: v.useFor ?? [],
+        purpose: v.purpose?.trim() ?? "",
+      });
+      setConfirmOpen(false);
+      message.success(`สร้างคำขอสำเร็จ เลขที่อ้างอิง ${created.referenceNo}`);
+      // Land on the list so the new draft row is visible.
+      router.push("/request/import-weapon-a4/list");
+    } catch {
+      setConfirmOpen(false);
+      message.error("สร้างคำขอไม่สำเร็จ");
+    }
   };
 
   return (
@@ -213,6 +239,7 @@ export default function CreateFormCard() {
       />
       <ConfirmCreateModal
         open={confirmOpen}
+        loading={isCreating}
         onCancel={() => setConfirmOpen(false)}
         onConfirm={handleConfirmCreate}
       />

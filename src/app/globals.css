@@ -75,10 +75,11 @@ body {
   color: #ffffff;
 }
 
-/* The selected submenu row gets a soft grey wash of its own — lighter than
-   the parent's band so the parent stays the stronger marker. */
+/* Selected submenu row reads exactly like a selected main-menu row. That is
+   already what antd's `darkItemSelectedBg` token paints (brand.siderItemSelectedBg),
+   so this only has to re-assert it over the darker submenu panel. */
 .app-sidebar .ant-menu .ant-menu-sub .ant-menu-item-selected {
-  background: rgba(255, 255, 255, 0.12);
+  background: #343d55; /* brand.siderItemSelectedBg */
   color: #ffffff;
 }
 
@@ -202,6 +203,18 @@ body {
   color: #ffa39e;
 }
 
+/* rc-dropdown writes `min-width: <trigger width>` as an inline style on the
+   overlay, so a long "ชื่อ - บริษัท" in the header stretches the panel to match.
+   Drop that (needs `!important` to beat the inline style) and size the panel to
+   its own rows instead — the widest, "เปลี่ยนรหัสผ่าน", needs ~140px. */
+.ant-dropdown.app-user-menu {
+  min-width: 0 !important;
+}
+
+.app-user-menu .ant-dropdown-menu {
+  min-width: 180px;
+}
+
 /* Header account dropdown — dark panel like the sidebar.
    Colors come from the Menu dark tokens in UIProvider; only the squared-off
    rows and roomier padding from the design are overridden here. */
@@ -211,8 +224,10 @@ body {
   font-size: 16px;
 }
 
+/* The three glyphs here are design-system SVGs drawn on a 16px grid (they also
+   carry the size inline, so this rule and the icon must agree). */
 .app-user-menu .ant-dropdown-menu .ant-dropdown-menu-item-icon {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* Card-style tabs above the form container — separated bordered boxes */

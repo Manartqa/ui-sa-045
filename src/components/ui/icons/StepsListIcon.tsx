@@ -1,9 +1,16 @@
 import React from "react";
 
-/** "6 ขั้นตอนการยื่นคำขออนุญาต" — boxed list from the design system. */
-export default function StepsListIcon() {
+/**
+ * "6 ขั้นตอนการยื่นคำขออนุญาต" — boxed list from the design system.
+ *
+ * Props are forwarded to the `<svg>`: antd's Menu clones the icon element to
+ * add `ant-menu-item-icon`, which carries the gap between icon and label. Drop
+ * the spread and the class never reaches the DOM and the label sits flush.
+ */
+export default function StepsListIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      {...props}
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"

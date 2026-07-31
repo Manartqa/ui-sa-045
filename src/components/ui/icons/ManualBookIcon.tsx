@@ -1,9 +1,11 @@
 import React from "react";
 
-/** "คู่มือการใช้งาน" — book from the design system. */
-export default function ManualBookIcon() {
+/** "คู่มือการใช้งาน" — book from the design system. Props go to the `<svg>` so
+ *  antd's `ant-menu-item-icon` class (and its icon-to-label gap) lands. */
+export default function ManualBookIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      {...props}
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"

@@ -4,23 +4,29 @@ import {
   HomeOutlined,
   FileTextOutlined,
   UserAddOutlined,
-  UserOutlined,
-  KeyOutlined,
-  LogoutOutlined,
   DashboardOutlined,
   ReadOutlined,
   ApiOutlined,
 } from "@ant-design/icons";
 import {
   HomeIcon,
+  KeyIcon,
+  LogoutIcon,
   ManualBookIcon,
   PaymentCardIcon,
+  ProfileIcon,
   StepsListIcon,
 } from "@/components/ui/icons";
 import { brand } from "@/theme";
 import type { UserRole } from "@/types/app/auth";
 
-export const SIDEBAR_WIDTH = 256;
+/**
+ * Fits the longest top-level label on one line:
+ * "คู่มือการใช้งานสำหรับผู้ประกอบการ" measures 192px at 14px Noto Sans Thai,
+ * plus 24px padding-left + 16px icon + 10px icon gap + 16px padding-right = 258.
+ * The เมนูย่อย under "คำขออนุญาต" still wrap — those labels run past 450px.
+ */
+export const SIDEBAR_WIDTH = 264;
 export const SIDEBAR_COLLAPSED_WIDTH = 80;
 
 export const APP_VERSION = "Version : 1.0.0";
@@ -59,17 +65,17 @@ export const USER_MENU_KEYS = {
 export const USER_MENU_ITEMS: MenuProps["items"] = [
   {
     key: USER_MENU_KEYS.profile,
-    icon: <UserOutlined />,
+    icon: <ProfileIcon />,
     label: "โปรไฟล์",
   },
   {
     key: USER_MENU_KEYS.changePassword,
-    icon: <KeyOutlined />,
+    icon: <KeyIcon />,
     label: "เปลี่ยนรหัสผ่าน",
   },
   {
     key: USER_MENU_KEYS.logout,
-    icon: <LogoutOutlined />,
+    icon: <LogoutIcon />,
     label: "ออกจากระบบ",
   },
 ];

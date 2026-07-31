@@ -1,9 +1,11 @@
 import React from "react";
 
-/** "หน้าหลัก" — solid house from the design system. */
-export default function HomeIcon() {
+/** "หน้าหลัก" — solid house from the design system. Props go to the `<svg>` so
+ *  antd's `ant-menu-item-icon` class (and its gap) lands. */
+export default function HomeIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
+      {...props}
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"
